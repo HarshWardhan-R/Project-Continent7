@@ -4,16 +4,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antarctica</title>
+    <title>Antarctica: Its Beauty and Importance</title>
     <!-- Slick Slider CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+        }
+        #container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .controls button {
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .slider-container {
+            padding: 20px;
+        }
+        .slide-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .slick-active .slide-content {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <div id="container">
-        <div id="text">Antartica: Journey to the end of the World</div>
+        <video id="video" autoplay loop muted>
+            <source src="antarctica1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="controls">
+            <button id="playPause">Pause</button>
+            <button id="muteUnmute">Unmute</button>
+        </div>
     </div>
 
     <div class="slider-container">
@@ -21,8 +71,7 @@
             <div class="slide">
                 <div class="slide-content">
                     <h2>History from Gondwana</h2>
-                    <p>History from Gondwana
-Antarctica's history dates back over 200 million years to the supercontinent Gondwana. During the Mesozoic era, Gondwana began to break apart, eventually giving rise to the continents as we know them today. Antarctica drifted towards the South Pole, and over millions of years, it became increasingly isolated and cold. About 34 million years ago, the Antarctic Circumpolar Current developed, encircling the continent and cutting it off from warmer ocean currents. This led to the extensive glaciation of Antarctica, creating the icy environment that characterizes the continent today.</p>
+                    <p>Antarctica's history dates back over 200 million years to the supercontinent Gondwana. During the Mesozoic era, Gondwana began to break apart, eventually giving rise to the continents as we know them today. Antarctica drifted towards the South Pole, and over millions of years, it became increasingly isolated and cold. About 34 million years ago, the Antarctic Circumpolar Current developed, encircling the continent and cutting it off from warmer ocean currents. This led to the extensive glaciation of Antarctica, creating the icy environment that characterizes the continent today.</p>
                 </div>
                 <div class="slide-image" style="background-image: url('antarctica2.jpg');"></div>
             </div>
@@ -43,14 +92,14 @@ Antarctica's history dates back over 200 million years to the supercontinent Gon
             <div class="slide">
                 <div class="slide-content">
                     <h2>Significance</h2>
-                    <p>Antarctica holds significant scientific, environmental, and geopolitical importance. Scientifically, it provides invaluable data for understanding Earth's climate history through ice core samples that contain trapped air bubbles, offering a record of past atmospheric conditions. The continent is also a natural laboratory for studying unique ecosystems and the effects of extreme environments on life.Environmentally,Antarctica plays a crucial role in regulating global climate. Its ice sheets and glaciers reflect sunlight, helping to cool the Earth. The continent's cold waters drive the global ocean conveyor belt, which influences weather patterns and ocean currents worldwide.</p>
+                    <p>Antarctica holds significant scientific, environmental, and geopolitical importance. Scientifically, it provides invaluable data for understanding Earth's climate history through ice core samples that contain trapped air bubbles, offering a record of past atmospheric conditions. The continent is also a natural laboratory for studying unique ecosystems and the effects of extreme environments on life. Environmentally, Antarctica plays a crucial role in regulating global climate. Its ice sheets and glaciers reflect sunlight, helping to cool the Earth. The continent's cold waters drive the global ocean conveyor belt, which influences weather patterns and ocean currents worldwide.</p>
                 </div>
                 <div class="slide-image" style="background-image: url('antarctica5.jpg');"></div>
             </div>
             <div class="slide">
                 <div class="slide-content">
                     <h2>Effect of Climate Change on Antarctica</h2>
-                    <p>Climate change poses a significant threat to Antarctica's delicate environment. Rising global temperatures are causing the continent's ice sheets to melt at an alarming rate, contributing to global sea-level rise. The West Antarctic Ice Sheet, in particular, is vulnerable, and its collapse could lead to several meters of sea-level rise, with catastrophic consequences for coastal communities worldwide.Warming temperatures are also affecting the continent's wildlife. Penguins and seals that rely on sea ice for breeding and feeding are facing habitat loss. Changes in the distribution and abundance of krill due to shifting ocean temperatures could disrupt the entire Antarctic food web. Additionally, the melting ice is exposing previously buried organic material, releasing greenhouse gases like methane and further accelerating global warming.</p>
+                    <p>Climate change poses a significant threat to Antarctica's delicate environment. Rising global temperatures are causing the continent's ice sheets to melt at an alarming rate, contributing to global sea-level rise. The West Antarctic Ice Sheet, in particular, is vulnerable, and its collapse could lead to several meters of sea-level rise, with catastrophic consequences for coastal communities worldwide. Warming temperatures are also affecting the continent's wildlife. Penguins and seals that rely on sea ice for breeding and feeding are facing habitat loss. Changes in the distribution and abundance of krill due to shifting ocean temperatures could disrupt the entire Antarctic food web. Additionally, the melting ice is exposing previously buried organic material, releasing greenhouse gases like methane and further accelerating global warming.</p>
                 </div>
                 <div class="slide-image" style="background-image: url('antarctica6.jpg');"></div>
             </div>
@@ -70,6 +119,49 @@ Antarctica's history dates back over 200 million years to the supercontinent Gon
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- Custom JS -->
     <script src="script.js"></script>
+    <script>
+        const video = document.getElementById('video');
+        const playPauseButton = document.getElementById('playPause');
+        const muteUnmuteButton = document.getElementById('muteUnmute');
+
+        playPauseButton.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playPauseButton.textContent = 'Pause';
+            } else {
+                video.pause();
+                playPauseButton.textContent = 'Play';
+            }
+        });
+
+        muteUnmuteButton.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                muteUnmuteButton.textContent = 'Mute';
+            } else {
+                video.muted = true;
+                muteUnmuteButton.textContent = 'Unmute';
+            }
+        });
+
+        $('.slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+            $('.slick-active .slide-content').css('opacity', '0');
+        });
+
+        $('.slider').on('afterChange', function(event, slick, currentSlide) {
+            $('.slick-active .slide-content').css('opacity', '1');
+        });
+
+        $(document).ready(function(){
+            $('.slider').slick({
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: true,
+                fade: true,
+                cssEase: 'linear'
+            });
+        });
+    </script>
 </body>
 </html>
 
